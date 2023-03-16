@@ -67,6 +67,47 @@ const genres = [
 ];
 
 //Your endpoints go here
+app.get('/users', (req, res) => {
+  res.status(200).json({'message': "Get all users"});
+})
+
+app.get('/users/:userId', (req, res) => {
+  res.status(200).json({'message': "Get user with id " + req.params.userId});
+})
+
+app.post('/users', (req, res) => {
+  res.status(200).json({'message': "Post a new user"});
+})
+
+app.put('/users/:userId', (req, res) => {
+  res.status(200).json({'message': "Update user with id " + req.params.userId});
+})
+
+app.patch('/users/:userId', (req, res) => {
+  res.status(200).json({'message': "Partially update user with id " + req.params.userId});
+})
+
+app.delete('/users', (req, res) => {
+  res.status(200).json({'message': "Delete all users"});
+})
+
+app.delete('/users/:userId', (req, res) => {
+  res.status(200).json({'message': "Delete user with id " + req.params.userId});
+})
+
+app.use('*', (req, res, next) => {
+    res.status(405).send('Operation not supported');
+})
+
+//Note endpoints
+
+app.get('/users/:userId/notes', (req, res) => {
+  res.status(200).json({'message': "Get all notes for user with id " + req.params.userId});
+})
+
+app.get('/users/:userId/notes/:noteId', (req, res) => {
+  res.status(200).json({'message': "Get note with id for user with id " + req.params.userId});
+})
 
 //Start the server
 app.listen(port, () => {
