@@ -68,22 +68,36 @@ const genres = [
 
 //Your endpoints go here
 app.get('/tunes', (req, res) => {
-  res.status(200).json({'message': "Get all tunes"});
+  res.status(200).json(tunes);
 })
 
-app.get('/tunes/:genreId', (req, res) => {
-  res.status(200).json({'message': "Get tune with id " + req.params.tuneId});
+app.get('/tunes/:tuneId', (req, res) => {
+  const tuneId = req.params.tuneId;
+  const tune = tunes.find(tune => tune.id === tuneId);
+  
+  if (!tune) {
+    res.status(404).json({'message': 'Tune not found'});
+  } else {
+    res.status(200).json(tune);
+  }
 })
+
+// app.post('/tunes', (req, res) => {
+//   res.status(200).json({'message': "Post a new tune"});
+// })
 
 app.post('/tunes', (req, res) => {
-  res.status(200).json({'message': "Post a new tune"});
+  const newTune = req.body;
+  newTune.id = (tunes.length).toString(); //posts a new tune to the end of the array
+  tunes.push(newTune); //needs checking, not 100% working.
+  res.status(201).json(tunes);
 })
 
-app.put('/tunes/:genreId', (req, res) => {
+app.put('/tunes/:tuneId', (req, res) => {
   res.status(200).json({'message': "Update tune with id " + req.params.tuneId});
 })
 
-app.patch('/tunes/:genreId', (req, res) => {
+app.patch('/tunes/:tuneId', (req, res) => {
   res.status(200).json({'message': "Partially update tune with id " + req.params.tuneId});
 })
 
@@ -91,7 +105,7 @@ app.delete('/tunes', (req, res) => {
   res.status(200).json({'message': "Delete all tunes"});
 })
 
-app.delete('/tunes/:genreId', (req, res) => {
+app.delete('/tunes/:tuneId', (req, res) => {
   res.status(200).json({'message': "Delete tune with id " + req.params.tuneId});
 })
 
@@ -101,11 +115,11 @@ app.use('*', (req, res, next) => {
 
 //Note endpoints
 
-app.get('/tunes/:genreId/notes', (req, res) => {
+app.get('/tunes/:tuneId/notes', (req, res) => {
   res.status(200).json({'message': "Get all notes for tune with id " + req.params.tuneId});
 })
 
-app.get('/tunes/:genreId/notes/:noteId', (req, res) => {
+app.get('/tunes/:tuneId/notes/:noteId', (req, res) => {
   res.status(200).json({'message': "Get note with id for tune with id " + req.params.tuneId});
 })
 
