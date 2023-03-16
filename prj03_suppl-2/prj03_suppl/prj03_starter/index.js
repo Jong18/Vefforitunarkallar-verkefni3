@@ -67,32 +67,32 @@ const genres = [
 ];
 
 //Your endpoints go here
-app.get('/users', (req, res) => {
-  res.status(200).json({'message': "Get all users"});
+app.get('/tunes', (req, res) => {
+  res.status(200).json({'message': "Get all tunes"});
 })
 
-app.get('/users/:userId', (req, res) => {
-  res.status(200).json({'message': "Get user with id " + req.params.userId});
+app.get('/tunes/:genreId', (req, res) => {
+  res.status(200).json({'message': "Get tune with id " + req.params.tuneId});
 })
 
-app.post('/users', (req, res) => {
-  res.status(200).json({'message': "Post a new user"});
+app.post('/tunes', (req, res) => {
+  res.status(200).json({'message': "Post a new tune"});
 })
 
-app.put('/users/:userId', (req, res) => {
-  res.status(200).json({'message': "Update user with id " + req.params.userId});
+app.put('/tunes/:genreId', (req, res) => {
+  res.status(200).json({'message': "Update tune with id " + req.params.tuneId});
 })
 
-app.patch('/users/:userId', (req, res) => {
-  res.status(200).json({'message': "Partially update user with id " + req.params.userId});
+app.patch('/tunes/:genreId', (req, res) => {
+  res.status(200).json({'message': "Partially update tune with id " + req.params.tuneId});
 })
 
-app.delete('/users', (req, res) => {
-  res.status(200).json({'message': "Delete all users"});
+app.delete('/tunes', (req, res) => {
+  res.status(200).json({'message': "Delete all tunes"});
 })
 
-app.delete('/users/:userId', (req, res) => {
-  res.status(200).json({'message': "Delete user with id " + req.params.userId});
+app.delete('/tunes/:genreId', (req, res) => {
+  res.status(200).json({'message': "Delete tune with id " + req.params.tuneId});
 })
 
 app.use('*', (req, res, next) => {
@@ -101,12 +101,12 @@ app.use('*', (req, res, next) => {
 
 //Note endpoints
 
-app.get('/users/:userId/notes', (req, res) => {
-  res.status(200).json({'message': "Get all notes for user with id " + req.params.userId});
+app.get('/tunes/:genreId/notes', (req, res) => {
+  res.status(200).json({'message': "Get all notes for tune with id " + req.params.tuneId});
 })
 
-app.get('/users/:userId/notes/:noteId', (req, res) => {
-  res.status(200).json({'message': "Get note with id for user with id " + req.params.userId});
+app.get('/tunes/:genreId/notes/:noteId', (req, res) => {
+  res.status(200).json({'message': "Get note with id for tune with id " + req.params.tuneId});
 })
 
 //Start the server
